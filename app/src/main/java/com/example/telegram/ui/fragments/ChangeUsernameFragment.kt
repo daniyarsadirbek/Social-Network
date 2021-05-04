@@ -14,7 +14,7 @@ class ChangeUsernameFragment : BaseChangeFragment(R.layout.fragment_change_usern
         super.onResume()
         settings_input_username.setText(USER.username)
     }
-    
+
 
     override fun change() {
         mNewUsername = settings_input_username.text.toString().toLowerCase(Locale.getDefault())
