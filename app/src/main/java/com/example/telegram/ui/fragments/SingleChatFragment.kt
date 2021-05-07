@@ -31,9 +31,13 @@ class SingleChatFragment(private val contact: CommonModel) :
     }
 
     private fun initInfoToolbar() {
+        if (mReceivingUser.fullname.isEmpty()) {
+            mToolbarInfo.toolbar_chat_fullname.text = contact.fullname
+        } else
+            mToolbarInfo.toolbar_chat_fullname.text = mReceivingUser.fullname
+
         mToolbarInfo.apply {
             toolbar_chat_image.downloadAndSetImage(mReceivingUser.photoUrl)
-            toolbar_chat_fullname.text = mReceivingUser.fullname
             toolbar_chat_status.text = mReceivingUser.state
         }
     }
