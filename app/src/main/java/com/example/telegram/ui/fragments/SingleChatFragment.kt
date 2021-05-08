@@ -7,6 +7,7 @@ import com.example.telegram.models.UserModel
 import com.example.telegram.utils.*
 import com.google.firebase.database.DatabaseReference
 import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.main.fragment_single_chat.*
 import kotlinx.android.synthetic.main.toolbar_info.view.*
 
 class SingleChatFragment(private val contact: CommonModel) :
@@ -24,11 +25,21 @@ class SingleChatFragment(private val contact: CommonModel) :
         mListenerInfoToolbar = AppValueEventListener {
             mReceivingUser = it.getUserModel()
             initInfoToolbar()
+
+            chat_btn_send_message.setOnClickListener {
+                val message = chat_input_message.text.toString()
+                if (message.isEmpty()) {
+                    showToast("Введите сообщение")
+                } else sendMessage(message, contact.id, TYPE_TEXT) {
+                    chat_input_message.setText("")
+                }
+            }
         }
 
         mRefUser = REF_DATABASE_ROOT.child(NODE_USERS).child(contact.id)
         mRefUser.addValueEventListener(mListenerInfoToolbar)
     }
+
 
     private fun initInfoToolbar() {
         if (mReceivingUser.fullname.isEmpty()) {
