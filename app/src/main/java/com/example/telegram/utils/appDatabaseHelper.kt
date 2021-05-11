@@ -113,7 +113,7 @@ fun DataSnapshot.getUserModel(): UserModel =
 
 fun sendMessage(message: String, receivingUserID: String, typeText: String, function: () -> Unit) {
     val refDialogUser = "$NODE_MESSAGES/$CURRENT_UID/$receivingUserID"
-    val refDialogReceivingUser = "$NODE_MESSAGES/$CURRENT_UID/$CURRENT_UID"
+    val refDialogReceivingUser = "$NODE_MESSAGES/$receivingUserID/$CURRENT_UID"
     val messageKey = REF_DATABASE_ROOT.child(refDialogUser).push().key
 
     val mapMessage = hashMapOf<String, Any>()

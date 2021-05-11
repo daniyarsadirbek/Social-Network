@@ -32,11 +32,11 @@ class EnterPhoneNumberFragment : Fragment(R.layout.fragment_enter_phone_number) 
                 }
             }
 
-            override fun onVerificationFailed(p0: FirebaseException?) {
+            override fun onVerificationFailed(p0: FirebaseException) {
                 showToast(p0?.message.toString())
             }
 
-            override fun onCodeSent(id: String, token: PhoneAuthProvider.ForceResendingToken?) {
+            override fun onCodeSent(id: String, token: PhoneAuthProvider.ForceResendingToken) {
                 replaceFragment(EnterCodeFragment(mPhoneNumber, id))
             }
         }
