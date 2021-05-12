@@ -1,7 +1,9 @@
 package com.example.telegram.ui.fragments
 
 import com.example.telegram.R
-import com.example.telegram.utils.*
+import com.example.telegram.database.USER
+import com.example.telegram.database.setNameToDatabase
+import com.example.telegram.utils.showToast
 import com.mikepenz.materialize.util.KeyboardUtil.hideKeyboard
 import kotlinx.android.synthetic.main.fragment_change_name.*
 
@@ -32,16 +34,8 @@ class ChangeNameFragment : BaseChangeFragment(R.layout.fragment_change_name) {
             showToast(getString(R.string.settings_toast_name_is_empty))
         } else {
             val fullName = "$name $surname"
-            REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID).child(CHILD_FULLNAME)
-                .setValue(fullName).addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        showToast(getString(R.string.toast_data_update))
-                        USER.fullname = fullName
-                        fragmentManager?.popBackStack()
-                        APP_ACTIVITY.mAppDrawer.updateHeader()
-                        hideKeyboard(this.activity)
-                    }
-                }
+            setNameToDatabase(fullName)
+            hideKeyboard(this.activity)
         }
     }
 }
