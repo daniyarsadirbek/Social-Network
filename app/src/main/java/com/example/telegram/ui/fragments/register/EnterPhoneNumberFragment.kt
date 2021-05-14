@@ -3,7 +3,10 @@ package com.example.telegram.ui.fragments.register
 import androidx.fragment.app.Fragment
 import com.example.telegram.R
 import com.example.telegram.database.AUTH
-import com.example.telegram.utils.*
+import com.example.telegram.utils.APP_ACTIVITY
+import com.example.telegram.utils.replaceFragment
+import com.example.telegram.utils.restartActivity
+import com.example.telegram.utils.showToast
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
@@ -29,7 +32,7 @@ class EnterPhoneNumberFragment : Fragment(R.layout.fragment_enter_phone_number) 
             }
 
             override fun onVerificationFailed(p0: FirebaseException) {
-                showToast(p0?.message.toString())
+                showToast(p0.message.toString())
             }
 
             override fun onCodeSent(id: String, token: PhoneAuthProvider.ForceResendingToken) {
